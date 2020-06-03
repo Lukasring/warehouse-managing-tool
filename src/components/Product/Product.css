@@ -9,12 +9,16 @@
 }
 
 .product-item ul {
+  width: 100%;
+  margin: 0;
   text-align: center;
   border: 1px black solid;
 }
 
 .product-item li {
   display: inline-block;
+  width: 11%;
+  text-align: center;
   /* margin: 0.5rem 0.5rem; */
   padding: 1rem;
 }

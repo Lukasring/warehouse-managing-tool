@@ -12,6 +12,9 @@ function Products(props) {
         color={product.color}
         active={product.active}
         key={index}
+        removeItem={() => {
+          props.removeItem(index);
+        }}
       ></Product>
     );
   });

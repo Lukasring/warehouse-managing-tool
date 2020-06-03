@@ -20,7 +20,7 @@ const Product = (props) => {
           <button>Edit</button>
         </li>
         <li>
-          <button>Delete</button>
+          <button onClick={props.removeItem}>Delete</button>
         </li>
       </ul>
     </div>
