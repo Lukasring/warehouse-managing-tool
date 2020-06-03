@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Products from "../components/Products/Products";
+import UserInputForm from "../components/UserInput/UserInputForm";
+
 import "./App.css";
 
 function App() {
@@ -36,10 +38,14 @@ function App() {
     setProducts(newProducts);
   };
 
-  console.log(products);
-
   return (
-    <Products products={products} removeItem={removeProductHandler}></Products>
+    <div>
+      <Products
+        products={products}
+        removeItem={removeProductHandler}
+      ></Products>
+      <UserInputForm></UserInputForm>
+    </div>
   );
 }
 
