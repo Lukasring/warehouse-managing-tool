@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+.product-item {
+  width: 60%;
+  margin: auto;
+  font-family: sans-serif;
+}
+
+.product-item ul {
+  text-align: center;
+  border: 1px black solid;
+}
+
+.product-item li {
+  display: inline-block;
+  /* margin: 0.5rem 0.5rem; */
+  padding: 1rem;
+}
