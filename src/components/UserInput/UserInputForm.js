@@ -23,15 +23,10 @@ const UserInputForm = (props) => {
       ? (hasRequiredKeys = true)
       : (hasRequiredKeys = false);
 
-    // function checkArray(myArr) {
-    //   for (let i = 0; i < myArr.length; i++) {
-    //     if (myArr[i].trim() === "") {
-    //       return false;
-    //     }
-    //   }
-    //   return true;
-    // }
     function noneEmpty(arr) {
+      // for (let i = 0; i < arr.length; i++) {
+      //   arr[i] = arr[i].trim();
+      // }
       return arr.indexOf("") === -1;
     }
 
@@ -49,7 +44,7 @@ const UserInputForm = (props) => {
   console.log("form validation " + formInputValidation(addedProduct));
 
   return (
-    <form className={styles.Form}>
+    <form className={styles.Form} id="product-submit-form">
       <label className={styles.Label}>Enter Product Properties</label>
       <input
         className={styles.Input}
@@ -93,6 +88,8 @@ const UserInputForm = (props) => {
         onClick={(event) => {
           if (formInputValidation(addedProduct)) {
             props.submitHandler(event, addedProduct);
+            document.getElementById("product-submit-form").reset();
+            setAddedProducts([]);
           } else {
             event.preventDefault();
           }

@@ -14,6 +14,9 @@ function Products(props) {
         color={product.color}
         active={product.active}
         key={index}
+        isActive={(event) => {
+          props.isActive(event, index);
+        }}
         removeItem={() => {
           props.removeItem(index);
         }}

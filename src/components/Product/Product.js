@@ -11,7 +11,7 @@ const Product = (props) => {
         <li>{props.weight}</li>
         <li>{props.color}</li>
         <li>
-          <input type="checkbox"></input>
+          <input type="checkbox" onChange={props.isActive}></input>
         </li>
         <li>
           <button>View</button>

@@ -12,7 +12,6 @@ function App() {
       type: "headwear",
       weight: "120g",
       color: "Red",
-      active: false,
     },
     {
       name: "Shirt",
@@ -20,7 +19,6 @@ function App() {
       type: "Top",
       weight: "130g",
       color: "Blue",
-      active: false,
     },
     {
       name: "Sweater",
@@ -28,7 +26,6 @@ function App() {
       type: "Top",
       weight: "200g",
       color: "Yellow",
-      active: false,
     },
   ]);
 
@@ -49,14 +46,21 @@ function App() {
     // addProductHandler(products, userInput);
     const newProducts = [...products];
     newProducts.push(userInput);
-    console.log(newProducts);
     setProducts(newProducts);
+  };
+
+  const checkboxHandler = (event, index) => {
+    const newProducts = [...products];
+    newProducts[index].isActive = event.target.checked;
+    setProducts(newProducts);
+    console.log(products);
   };
 
   return (
     <div>
       <Products
         products={products}
+        isActive={checkboxHandler}
         removeItem={removeProductHandler}
       ></Products>
       <UserInputForm submitHandler={handleFormSubmit}></UserInputForm>
