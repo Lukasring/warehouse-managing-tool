@@ -1,18 +1,52 @@
 import React, { useState } from "react";
 import styles from "./UserInputForm.module.css";
 const UserInputForm = (props) => {
-  const [addedProducts, setAddedProducts] = useState([
+  const [addedProduct, setAddedProducts] = useState([
     // { name: "", ean: "", type: "", weight: "", color: "" }
   ]);
 
   const handleChange = (event) => {
     setAddedProducts({
-      ...addedProducts,
+      ...addedProduct,
       [event.target.name]: event.target.value,
     });
   };
 
-  // console.log(addedProducts);
+  const formInputValidation = (addedProduct) => {
+    let isValid = false;
+    const noOfRequiredKeys = 5; //simple object key validation for now
+    const productValues = Object.values(addedProduct);
+    let hasRequiredKeys = false;
+    let keysHaveValues = false;
+
+    noOfRequiredKeys === Object.keys(productValues).length
+      ? (hasRequiredKeys = true)
+      : (hasRequiredKeys = false);
+
+    // function checkArray(myArr) {
+    //   for (let i = 0; i < myArr.length; i++) {
+    //     if (myArr[i].trim() === "") {
+    //       return false;
+    //     }
+    //   }
+    //   return true;
+    // }
+    function noneEmpty(arr) {
+      return arr.indexOf("") === -1;
+    }
+
+    keysHaveValues = noneEmpty(productValues);
+
+    if (hasRequiredKeys && keysHaveValues) {
+      isValid = true;
+    } else isValid = false;
+
+    console.log("keys " + hasRequiredKeys);
+    console.log("values " + keysHaveValues);
+    console.log("is valid " + isValid);
+    return isValid;
+  };
+  console.log("form validation " + formInputValidation(addedProduct));
 
   return (
     <form className={styles.Form}>
@@ -57,7 +91,11 @@ const UserInputForm = (props) => {
         type="submit"
         value="Add Product"
         onClick={(event) => {
-          props.submitHandler(event, addedProducts);
+          if (formInputValidation(addedProduct)) {
+            props.submitHandler(event, addedProduct);
+          } else {
+            event.preventDefault();
+          }
         }}
       />
     </form>
