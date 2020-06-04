@@ -38,13 +38,28 @@ function App() {
     setProducts(newProducts);
   };
 
+  // const addProductHandler = (addedProduct, products) => {
+  //   const newProducts = [...products, { addedProduct }];
+  //   setProducts(newProducts);
+  // };
+
+  const handleFormSubmit = (event, userInput) => {
+    event.preventDefault();
+    console.log(userInput);
+    // addProductHandler(products, userInput);
+    const newProducts = [...products];
+    newProducts.push(userInput);
+    console.log(newProducts);
+    setProducts(newProducts);
+  };
+
   return (
     <div>
       <Products
         products={products}
         removeItem={removeProductHandler}
       ></Products>
-      <UserInputForm></UserInputForm>
+      <UserInputForm submitHandler={handleFormSubmit}></UserInputForm>
     </div>
   );
 }
