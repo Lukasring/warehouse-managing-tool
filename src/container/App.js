@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "../components/Header/Header";
 import Products from "../components/Products/Products";
 import UserInputForm from "../components/UserInput/UserInputForm";
 
@@ -58,6 +59,7 @@ function App() {
 
   return (
     <div>
+      <Header headerText="Warehouse Product Editing Tool"></Header>
       <Products
         products={products}
         isActive={checkboxHandler}
