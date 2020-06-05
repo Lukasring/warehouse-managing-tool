@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import Nav from "../components/Navigation/Nav";
 import Products from "../components/Products/Products";
 import UserInputForm from "../components/UserInput/UserInputForm";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
 
@@ -58,17 +59,31 @@ function App() {
     console.log(products);
   };
 
+  const productList = (
+    <Products
+      products={products}
+      isActive={checkboxHandler}
+      removeItem={removeProductHandler}
+    ></Products>
+  );
+
+  const userInputForm = (
+    <UserInputForm submitHandler={handleFormSubmit}></UserInputForm>
+  );
+
   return (
-    <div>
-      <Header headerText="Warehouse Product Editing Tool"></Header>
-      <Nav></Nav>
-      <Products
-        products={products}
-        isActive={checkboxHandler}
-        removeItem={removeProductHandler}
-      ></Products>
-      <UserInputForm submitHandler={handleFormSubmit}></UserInputForm>
-    </div>
+    <Router>
+      <Switch>
+        <div>
+          <Header headerText="Warehouse Product Editing Tool"></Header>
+          <Nav></Nav>
+          <Route path="/products" exact>
+            {productList}
+          </Route>
+          <Route path="/products/create">{userInputForm}</Route>
+        </div>
+      </Switch>
+    </Router>
   );
 }
 
