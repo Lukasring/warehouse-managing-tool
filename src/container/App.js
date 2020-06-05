@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import Nav from "../components/Navigation/Nav";
 import Products from "../components/Products/Products";
 import UserInputForm from "../components/UserInput/UserInputForm";
+import Preview from "../components/Preview/Preview";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
@@ -13,22 +14,25 @@ function App() {
       name: "Hat",
       ean: "123456789",
       type: "headwear",
-      weight: "120g",
+      weight: "120",
       color: "Red",
+      isActive: false,
     },
     {
       name: "Shirt",
       ean: "987654321",
       type: "Top",
-      weight: "130g",
+      weight: "130",
       color: "Blue",
+      isActive: false,
     },
     {
       name: "Sweater",
       ean: "123454321",
       type: "Top",
-      weight: "200g",
+      weight: "200",
       color: "Yellow",
+      isActive: false,
     },
   ]);
 
@@ -56,7 +60,7 @@ function App() {
     const newProducts = [...products];
     newProducts[index].isActive = event.target.checked;
     setProducts(newProducts);
-    console.log(products);
+    console.log(index);
   };
 
   const productList = (
@@ -73,16 +77,21 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        <div>
-          <Header headerText="Warehouse Product Editing Tool"></Header>
-          <Nav></Nav>
+      <div>
+        <Header headerText="Warehouse Product Editing Tool"></Header>
+        <Nav></Nav>
+        <Switch>
           <Route path="/products" exact>
             {productList}
           </Route>
-          <Route path="/products/create">{userInputForm}</Route>
-        </div>
-      </Switch>
+          <Route path="/products/create" exact>
+            {userInputForm}
+          </Route>
+        </Switch>
+        <Route path="/products/preview/:id">
+          <Preview products={products}></Preview>
+        </Route>
+      </div>
     </Router>
   );
 }

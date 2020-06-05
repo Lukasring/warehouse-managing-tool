@@ -7,12 +7,13 @@ function Products(props) {
     // console.log(Object.keys(product));
     return (
       <Product
+        index={index}
         name={product.name}
         ean={product.ean}
         type={product.type}
         weight={product.weight}
         color={product.color}
-        active={product.active}
+        active={product.isActive}
         key={index}
         isActive={(event) => {
           props.isActive(event, index);

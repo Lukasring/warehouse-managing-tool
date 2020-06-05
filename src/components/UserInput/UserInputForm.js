@@ -9,12 +9,13 @@ const UserInputForm = (props) => {
     setAddedProducts({
       ...addedProduct,
       [event.target.name]: event.target.value,
+      isActive: false,
     });
   };
 
   const formInputValidation = (addedProduct) => {
     let isValid = false;
-    const noOfRequiredKeys = 5; //simple object key validation for now
+    const noOfRequiredKeys = 6; //simple object key validation for now
     const productValues = Object.values(addedProduct);
     let hasRequiredKeys = false;
     let keysHaveValues = false;

@@ -1,0 +1,27 @@
+.Container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.PreviewCard {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  background-color: #ccc;
+  border: 1px solid black;
+  box-shadow: gray 8px 8px 8px 8px;
+  align-items: center;
+}
+
+.Name {
+  margin: 0;
+  margin-top: 0.5rem;
+  color: purple;
+}
+
+.Type {
+  margin: 0;
+  margin-bottom: 0.5rem;
+  color: rgb(65, 1, 65);
+  font-size: 1rem;
+}

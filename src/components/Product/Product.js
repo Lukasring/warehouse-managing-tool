@@ -1,5 +1,6 @@
 import React from "react";
 import "./Product.css";
+import { Link } from "react-router-dom";
 
 const Product = (props) => {
   return (
@@ -11,10 +12,16 @@ const Product = (props) => {
         <li>{props.weight}</li>
         <li>{props.color}</li>
         <li>
-          <input type="checkbox" onChange={props.isActive}></input>
+          <input
+            type="checkbox"
+            checked={props.active}
+            onChange={props.isActive}
+          ></input>
         </li>
         <li>
-          <button>View</button>
+          <Link to={`/products/preview/${props.index}`}>
+            <button>View</button>
+          </Link>
         </li>
         <li>
           <button>Edit</button>
