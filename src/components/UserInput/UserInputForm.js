@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import styles from "./UserInputForm.module.css";
+import { Redirect, useRouteMatch } from "react-router-dom";
 const UserInputForm = (props) => {
-  const [addedProduct, setAddedProducts] = useState([
-    // { name: "", ean: "", type: "", weight: "", color: "" }
-  ]);
+  const [addedProduct, setAddedProducts] = useState(
+    props.products ? props.products[props.index] : []
+  );
 
+  let match = useRouteMatch();
+  let index = match.params.id;
+
+  const [redirect, setRedirect] = useState(false);
   const handleChange = (event) => {
     setAddedProducts({
       ...addedProduct,
@@ -23,6 +28,8 @@ const UserInputForm = (props) => {
     noOfRequiredKeys === Object.keys(productValues).length
       ? (hasRequiredKeys = true)
       : (hasRequiredKeys = false);
+
+    console.log(Object.keys(productValues).length);
 
     function noneEmpty(arr) {
       // for (let i = 0; i < arr.length; i++) {
@@ -46,12 +53,14 @@ const UserInputForm = (props) => {
 
   return (
     <form className={styles.Form} id="product-submit-form">
+      {redirect ? <Redirect to="/products"></Redirect> : null}
       <label className={styles.Label}>Enter Product Properties</label>
       <input
         className={styles.Input}
         type="text"
         placeholder="NAME"
         name="name"
+        defaultValue={props.products ? props.products[props.index].name : null}
         onChange={handleChange}
       />
       <input
@@ -59,6 +68,7 @@ const UserInputForm = (props) => {
         type="text"
         placeholder="EAN"
         name="ean"
+        defaultValue={props.products ? props.products[props.index].ean : null}
         onChange={handleChange}
       />
       <input
@@ -66,6 +76,7 @@ const UserInputForm = (props) => {
         type="text"
         placeholder="TYPE"
         name="type"
+        defaultValue={props.products ? props.products[props.index].type : null}
         onChange={handleChange}
       />
       <input
@@ -73,6 +84,9 @@ const UserInputForm = (props) => {
         type="text"
         placeholder="WEIGHT"
         name="weight"
+        defaultValue={
+          props.products ? props.products[props.index].weight : null
+        }
         onChange={handleChange}
       />
       <input
@@ -80,17 +94,21 @@ const UserInputForm = (props) => {
         type="text"
         placeholder="COLOR"
         name="color"
+        defaultValue={props.products ? props.products[props.index].color : null}
         onChange={handleChange}
       />
       <input
         className={styles.SubmitButton}
         type="submit"
-        value="Add Product"
+        value={props.products ? "Save" : "Add Product"}
         onClick={(event) => {
           if (formInputValidation(addedProduct)) {
-            props.submitHandler(event, addedProduct);
+            props.submitHandler(event, addedProduct, index);
             document.getElementById("product-submit-form").reset();
             setAddedProducts([]);
+            if (props.products) {
+              setRedirect(true);
+            }
           } else {
             event.preventDefault();
           }

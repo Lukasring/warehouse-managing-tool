@@ -4,6 +4,7 @@ import Nav from "../components/Navigation/Nav";
 import Products from "../components/Products/Products";
 import UserInputForm from "../components/UserInput/UserInputForm";
 import Preview from "../components/Preview/Preview";
+import EditProduct from "../components/EditProduct/EditProduct";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import "./App.css";
@@ -47,7 +48,7 @@ function App() {
   //   setProducts(newProducts);
   // };
 
-  const handleFormSubmit = (event, userInput) => {
+  const formSubmitHandler = (event, userInput) => {
     event.preventDefault();
     console.log(userInput);
     // addProductHandler(products, userInput);
@@ -56,11 +57,17 @@ function App() {
     setProducts(newProducts);
   };
 
+  const saveEditHandler = (event, editedProduct, index) => {
+    event.preventDefault();
+    const newProducts = [...products];
+    newProducts[index] = editedProduct;
+    setProducts(newProducts);
+  };
+
   const checkboxHandler = (event, index) => {
     const newProducts = [...products];
     newProducts[index].isActive = event.target.checked;
     setProducts(newProducts);
-    console.log(index);
   };
 
   const productList = (
@@ -72,7 +79,7 @@ function App() {
   );
 
   const userInputForm = (
-    <UserInputForm submitHandler={handleFormSubmit}></UserInputForm>
+    <UserInputForm submitHandler={formSubmitHandler}></UserInputForm>
   );
 
   return (
@@ -81,16 +88,22 @@ function App() {
         <Header headerText="Warehouse Product Editing Tool"></Header>
         <Nav></Nav>
         <Switch>
-          <Route path="/products" exact>
+          <Route exact path="/products">
             {productList}
           </Route>
           <Route path="/products/create" exact>
             {userInputForm}
           </Route>
+          <Route path="/products/preview/:id">
+            <Preview products={products}></Preview>
+          </Route>
+          <Route path="/products/:id/edit">
+            <EditProduct
+              products={products}
+              saveEditHandler={saveEditHandler}
+            ></EditProduct>
+          </Route>
         </Switch>
-        <Route path="/products/preview/:id">
-          <Preview products={products}></Preview>
-        </Route>
       </div>
     </Router>
   );

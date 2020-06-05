@@ -24,7 +24,9 @@ const Product = (props) => {
           </Link>
         </li>
         <li>
-          <button>Edit</button>
+          <Link to={`/products/${props.index}/edit`}>
+            <button>Edit</button>
+          </Link>
         </li>
         <li>
           <button onClick={props.removeItem}>Delete</button>
