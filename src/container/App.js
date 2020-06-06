@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header/Header";
 import Nav from "../components/Navigation/Nav";
 import Products from "../components/Products/Products";
@@ -16,32 +16,46 @@ import {
 import "./App.css";
 
 function App() {
-  const [products, setProducts] = useState([
-    {
-      name: "Hat",
-      ean: "123456789",
-      type: "headwear",
-      weight: "120",
-      color: "Red",
-      isActive: false,
-    },
-    {
-      name: "Shirt",
-      ean: "987654321",
-      type: "Top",
-      weight: "130",
-      color: "Blue",
-      isActive: false,
-    },
-    {
-      name: "Sweater",
-      ean: "123454321",
-      type: "Top",
-      weight: "200",
-      color: "Yellow",
-      isActive: false,
-    },
-  ]);
+  // const [products, setProducts] = useState([
+  //   // {
+  //   //   name: "Hat",
+  //   //   ean: "123456789",
+  //   //   type: "headwear",
+  //   //   weight: "120",
+  //   //   color: "Red",
+  //   //   isActive: false,
+  //   // },
+  //   // {
+  //   //   name: "Shirt",
+  //   //   ean: "987654321",
+  //   //   type: "Top",
+  //   //   weight: "130",
+  //   //   color: "Blue",
+  //   //   isActive: false,
+  //   // },
+  //   // {
+  //   //   name: "Sweater",
+  //   //   ean: "123454321",
+  //   //   type: "Top",
+  //   //   weight: "200",
+  //   //   color: "Yellow",
+  //   //   isActive: false,
+  //   // },
+  // ]);
+
+  // const [products, setProducts] = useState(
+  //   localStorage.getItem("products" || "")
+  // );
+
+  const [products, setProducts] = useState(
+    JSON.parse(localStorage.getItem("products") || "")
+  );
+
+  useEffect(() => {
+    localStorage.setItem("products", JSON.stringify(products));
+  }, [products]);
+
+  console.log(localStorage.getItem("products"));
 
   const removeProductHandler = (index) => {
     const newProducts = [...products];
