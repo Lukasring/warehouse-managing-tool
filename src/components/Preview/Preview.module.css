@@ -25,3 +25,12 @@
   color: rgb(65, 1, 65);
   font-size: 1rem;
 }
+
+.Empty {
+  background-color: rgb(231, 164, 164);
+}
+
+.PreviewList {
+  display: flex;
+  justify-content: space-around;
+}

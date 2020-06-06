@@ -1,5 +1,5 @@
 import React from "react";
-// import styles from "./Preview.module.css";
+import styles from "./Preview.module.css";
 import SimplePreview from "./SimplePreviw";
 
 const PreviewList = (props) => {
@@ -26,7 +26,7 @@ const PreviewList = (props) => {
     });
   }
 
-  return activeProductList;
+  return <div className={styles.PreviewList}>{activeProductList}</div>;
 };
 
 export default PreviewList;
