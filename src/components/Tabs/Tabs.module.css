@@ -1,0 +1,13 @@
+.Tab {
+  font-size: 1rem;
+  padding: 0.5rem 4rem;
+  cursor: pointer;
+  background: white;
+  border: none;
+  outline: 0;
+}
+
+.TabGroup {
+  display: flex;
+  justify-content: center;
+}

@@ -3,7 +3,7 @@ import Header from "../components/Header/Header";
 import Nav from "../components/Navigation/Nav";
 import Products from "../components/Products/Products";
 import UserInputForm from "../components/UserInput/UserInputForm";
-import Preview from "../components/Preview/Preview";
+import DetailedPreview from "../components/Preview/DetailedPreview";
 import PreviewList from "../components/Preview/PreviewList";
 import EditProduct from "../components/EditProduct/EditProduct";
 import {
@@ -117,7 +117,7 @@ function App() {
             {userInputForm}
           </Route>
           <Route path="/products/preview/:id">
-            <Preview products={products}></Preview>
+            <DetailedPreview products={products}></DetailedPreview>
           </Route>
           <Route path="/products/:id/edit">
             <EditProduct
@@ -126,7 +126,7 @@ function App() {
             ></EditProduct>
           </Route>
           <Route exact path="/">
-            <Redirect to="/products/preview"></Redirect>
+            <Redirect to="/products"></Redirect>
           </Route>
           <Route exact path="/products/preview">
             <PreviewList products={products}></PreviewList>

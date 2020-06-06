@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./Preview.module.css";
-import SimplePreview from "./SimplePreviw";
+import SimplePreview from "./SimplePreview";
 
 const PreviewList = (props) => {
   const activeProducts = props.products.filter((product) => {
