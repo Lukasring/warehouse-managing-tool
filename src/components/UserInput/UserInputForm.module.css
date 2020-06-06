@@ -30,8 +30,13 @@
   border-radius: 1rem;
   color: white;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .SubmitButton:hover {
   background-color: lime;
+}
+
+.SubmitButton:focus {
+  outline: none;
 }

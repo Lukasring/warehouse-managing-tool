@@ -4,8 +4,14 @@ import Nav from "../components/Navigation/Nav";
 import Products from "../components/Products/Products";
 import UserInputForm from "../components/UserInput/UserInputForm";
 import Preview from "../components/Preview/Preview";
+import PreviewList from "../components/Preview/PreviewList";
 import EditProduct from "../components/EditProduct/EditProduct";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import "./App.css";
 
@@ -102,6 +108,12 @@ function App() {
               products={products}
               saveEditHandler={saveEditHandler}
             ></EditProduct>
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/products/preview"></Redirect>
+          </Route>
+          <Route exact path="/products/preview">
+            <PreviewList products={products}></PreviewList>
           </Route>
         </Switch>
       </div>

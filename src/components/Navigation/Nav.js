@@ -9,6 +9,9 @@ const Nav = () => {
         <Link className={styles.Link} to="/products">
           <li className={styles.NavItem}>Product List</li>
         </Link>
+        <Link className={styles.Link} to="/products/preview">
+          <li className={styles.NavItem}>Preview</li>
+        </Link>
         <Link className={styles.Link} to="/products/create">
           <li className={styles.NavNewProduct}>New Product</li>
         </Link>
