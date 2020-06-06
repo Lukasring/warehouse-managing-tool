@@ -20,7 +20,7 @@ const UserInputForm = (props) => {
 
   const formInputValidation = (addedProduct) => {
     let isValid = false;
-    const noOfRequiredKeys = 6; //simple object key validation for now
+    const noOfRequiredKeys = 8; //simple object key validation for now
     const productValues = Object.values(addedProduct);
     let hasRequiredKeys = false;
     let keysHaveValues = false;
@@ -95,6 +95,24 @@ const UserInputForm = (props) => {
         placeholder="COLOR"
         name="color"
         defaultValue={props.products ? props.products[props.index].color : null}
+        onChange={handleChange}
+      />
+      <input
+        className={styles.Input}
+        type="text"
+        placeholder="PRICE"
+        name="price"
+        defaultValue={props.products ? props.products[props.index].price : null}
+        onChange={handleChange}
+      />
+      <input
+        className={styles.Input}
+        type="text"
+        placeholder="QUANTITY"
+        name="quantity"
+        defaultValue={
+          props.products ? props.products[props.index].quantity : null
+        }
         onChange={handleChange}
       />
       <input

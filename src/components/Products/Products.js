@@ -13,6 +13,8 @@ function Products(props) {
         type={product.type}
         weight={product.weight}
         color={product.color}
+        price={product.price}
+        quantity={product.quantity}
         active={product.isActive}
         key={index}
         isActive={(event) => {

@@ -1,24 +1,32 @@
 import React from "react";
-import styles from "./Preview.module.css";
+// import styles from "./Preview.module.css";
+import SimplePreview from "./SimplePreviw";
 
 const PreviewList = (props) => {
   const activeProducts = props.products.filter((product) => {
     return product.isActive === true;
   });
-  console.log(activeProducts);
-  return activeProducts.map((product, index) => {
-    return (
-      <div className={styles.Container}>
-        <div className={styles.PreviewCard}>
-          <h1 className={styles.Name}>{product.name}</h1>
-          <h2 className={styles.Type}>{product.type}</h2>
-          <p>Color: {product.color}</p>
-          <p>Weight: {product.weight}g</p>
-          <p>EAN: {product.ean}</p>
-        </div>
-      </div>
-    );
-  });
+
+  let activeProductList = <p>There are no active products!</p>;
+
+  if (activeProducts.length > 0) {
+    activeProductList = activeProducts.map((product, index) => {
+      return (
+        <SimplePreview
+          name={product.name}
+          ean={product.ean}
+          type={product.type}
+          weight={product.weight}
+          color={product.color}
+          price={product.price}
+          quantity={product.quantity}
+          key={index}
+        ></SimplePreview>
+      );
+    });
+  }
+
+  return activeProductList;
 };
 
 export default PreviewList;

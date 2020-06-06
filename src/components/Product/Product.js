@@ -11,6 +11,8 @@ const Product = (props) => {
         <li>{props.type}</li>
         <li>{props.weight}</li>
         <li>{props.color}</li>
+        <li>{props.price}</li>
+        <li>{props.quantity}</li>
         <li>
           <input
             type="checkbox"

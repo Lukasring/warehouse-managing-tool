@@ -55,8 +55,6 @@ function App() {
     localStorage.setItem("products", JSON.stringify(products));
   }, [products]);
 
-  console.log(localStorage.getItem("products"));
-
   const removeProductHandler = (index) => {
     const newProducts = [...products];
     newProducts.splice(index, 1);
@@ -90,13 +88,17 @@ function App() {
     setProducts(newProducts);
   };
 
-  const productList = (
+  let productList = (
     <Products
       products={products}
       isActive={checkboxHandler}
       removeItem={removeProductHandler}
     ></Products>
   );
+
+  if (products.length === 0) {
+    productList = <p>There are no products</p>;
+  }
 
   const userInputForm = (
     <UserInputForm submitHandler={formSubmitHandler}></UserInputForm>
