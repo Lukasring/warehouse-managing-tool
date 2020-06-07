@@ -7,7 +7,7 @@ const ChangeLogChart = (props) => {
   let changeHistory = [];
   let key = "";
   if (props.change === "price") {
-    changeHistory = localStorage.getItem("priceHistory");
+    changeHistory = JSON.parse(localStorage.getItem("priceHistory"));
     key = "price";
   }
   if (props.change === "quantity") {
@@ -17,7 +17,7 @@ const ChangeLogChart = (props) => {
 
   console.log("c history: " + changeHistory);
 
-  const itemChangeHistory = JSON.parse(changeHistory).filter((item) => {
+  const itemChangeHistory = changeHistory.filter((item) => {
     return item.id === props.id;
   });
 

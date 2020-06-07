@@ -32,10 +32,18 @@ const DetailedPreview = (props) => {
     />
   );
 
+  const quantityHistoryChart = (
+    <ChangeLogChart
+      title="Quantity History"
+      id={props.products[index].id}
+      change="quantity"
+    />
+  );
+
   const tabContents = {
     Details: detailsContent,
     "Price History": priceHistoryChart,
-    "Quantity History": "Quantity History",
+    "Quantity History": quantityHistoryChart,
   };
 
   let previewCard = (

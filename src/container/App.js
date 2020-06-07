@@ -7,6 +7,10 @@ import DetailedPreview from "../components/Preview/DetailedPreview";
 import PreviewList from "../components/Preview/PreviewList";
 import EditProduct from "../components/EditProduct/EditProduct";
 import {
+  logPriceChange,
+  logQuantityChange,
+} from "../HelperFunctions/changeLoging";
+import {
   BrowserRouter as Router,
   Switch,
   Route,
@@ -43,10 +47,6 @@ function App() {
   //   // },
   // ]);
 
-  // const [products, setProducts] = useState(
-  //   localStorage.getItem("products" || "")
-  // );
-
   const [products, setProducts] = useState(
     JSON.parse(localStorage.getItem("products") || "")
   );
@@ -60,72 +60,14 @@ function App() {
   };
 
   const prevState = usePrevious(products);
+
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
   }, [products]);
 
-  const priceHistory = JSON.parse(localStorage.getItem("priceHistory")) || [];
   useEffect(() => {
-    const today = new Date();
-    let date;
-    let time;
-    let dateTime;
-    for (let i = 0; i < products.length; i++) {
-      if (!priceHistory.find((item) => item.id === products[i].id)) {
-        date =
-          today.getFullYear() +
-          "-" +
-          (today.getMonth() + 1) +
-          "-" +
-          today.getDate();
-        time = today.getHours() + ":" + today.getMinutes();
-        dateTime = date + " " + time;
-        const newPrice = {
-          id: products[i].id,
-          price: products[i].price,
-          time: dateTime,
-        };
-        priceHistory.push(newPrice);
-        console.log("Ar cia veik" + newPrice);
-        localStorage.setItem("priceHistory", JSON.stringify(priceHistory));
-      }
-    }
-  });
-  useEffect(() => {
-    // console.log(products);
-    // console.log(prevState);
-    if (prevState) {
-      if (products.length === prevState.length) {
-        const today = new Date();
-        let date;
-        let time;
-        let dateTime;
-        for (let i = 0; i < products.length; i++) {
-          if (products[i].price !== prevState[i].price) {
-            console.log(`${prevState[i].price} => ${products[i].price}`);
-            date =
-              today.getFullYear() +
-              "-" +
-              (today.getMonth() + 1) +
-              "-" +
-              today.getDate();
-            time = today.getHours() + ":" + today.getMinutes();
-            dateTime = date + " " + time;
-            console.log(dateTime);
-            const newPrice = {
-              id: products[i].id,
-              price: products[i].price,
-              time: dateTime,
-            };
-            priceHistory.push(newPrice);
-            localStorage.setItem("priceHistory", JSON.stringify(priceHistory));
-          }
-          if (products[i].quantity !== prevState[i].quantity) {
-            console.log(`${prevState[i].quantity} => ${products[i].quantity}`);
-          }
-        }
-      }
-    }
+    logPriceChange(prevState, products);
+    logQuantityChange(prevState, products);
   });
 
   const removeProductHandler = (index) => {
@@ -134,15 +76,9 @@ function App() {
     setProducts(newProducts);
   };
 
-  // const addProductHandler = (addedProduct, products) => {
-  //   const newProducts = [...products, { addedProduct }];
-  //   setProducts(newProducts);
-  // };
-
   const formSubmitHandler = (event, userInput) => {
     event.preventDefault();
     console.log(userInput);
-    // addProductHandler(products, userInput);
     const newProducts = [...products];
     newProducts.push(userInput);
     setProducts(newProducts);
