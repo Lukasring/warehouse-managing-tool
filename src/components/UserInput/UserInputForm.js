@@ -14,7 +14,9 @@ const UserInputForm = (props) => {
     setAddedProducts({
       ...addedProduct,
       [event.target.name]: event.target.value,
-      id: Math.random().toString(36).substr(2, 9),
+      id: props.products
+        ? props.products[props.index].id
+        : Math.random().toString(36).substr(2, 9),
       isActive: false,
     });
   };

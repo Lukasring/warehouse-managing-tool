@@ -64,9 +64,36 @@ function App() {
     localStorage.setItem("products", JSON.stringify(products));
   }, [products]);
 
+  const priceHistory = JSON.parse(localStorage.getItem("priceHistory")) || [];
   useEffect(() => {
-    console.log(products);
-    console.log(prevState);
+    const today = new Date();
+    let date;
+    let time;
+    let dateTime;
+    for (let i = 0; i < products.length; i++) {
+      if (!priceHistory.find((item) => item.id === products[i].id)) {
+        date =
+          today.getFullYear() +
+          "-" +
+          (today.getMonth() + 1) +
+          "-" +
+          today.getDate();
+        time = today.getHours() + ":" + today.getMinutes();
+        dateTime = date + " " + time;
+        const newPrice = {
+          id: products[i].id,
+          price: products[i].price,
+          time: dateTime,
+        };
+        priceHistory.push(newPrice);
+        console.log("Ar cia veik" + newPrice);
+        localStorage.setItem("priceHistory", JSON.stringify(priceHistory));
+      }
+    }
+  });
+  useEffect(() => {
+    // console.log(products);
+    // console.log(prevState);
     if (prevState) {
       if (products.length === prevState.length) {
         const today = new Date();
@@ -85,6 +112,13 @@ function App() {
             time = today.getHours() + ":" + today.getMinutes();
             dateTime = date + " " + time;
             console.log(dateTime);
+            const newPrice = {
+              id: products[i].id,
+              price: products[i].price,
+              time: dateTime,
+            };
+            priceHistory.push(newPrice);
+            localStorage.setItem("priceHistory", JSON.stringify(priceHistory));
           }
           if (products[i].quantity !== prevState[i].quantity) {
             console.log(`${prevState[i].quantity} => ${products[i].quantity}`);
@@ -146,7 +180,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Header headerText="Warehouse Product Editing Tool"></Header>
+        <Header headerText="Warehouse Product Managing Tool"></Header>
         <Nav></Nav>
         <Switch>
           <Route exact path="/products">
