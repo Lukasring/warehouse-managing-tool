@@ -1,6 +1,7 @@
 import React from "react";
 import Tabs from "../Tabs/Tabs";
 import SimplePreview from "./SimplePreview";
+import ChangeLogChart from "../ChangeLogChart/ChangeLogChart";
 // import styles from "./Preview.module.css";
 import { useRouteMatch } from "react-router";
 
@@ -23,9 +24,17 @@ const DetailedPreview = (props) => {
     ></SimplePreview>
   );
 
+  const priceHistoryChart = (
+    <ChangeLogChart
+      title="Price History"
+      id={props.products[index].id}
+      change="price"
+    />
+  );
+
   const tabContents = {
     Details: detailsContent,
-    "Price History": "Price History",
+    "Price History": priceHistoryChart,
     "Quantity History": "Quantity History",
   };
 
