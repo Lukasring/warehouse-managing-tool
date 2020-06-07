@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import Tabs from "../Tabs/Tabs";
 import SimplePreview from "./SimplePreview";
-import styles from "./Preview.module.css";
+// import styles from "./Preview.module.css";
 import { useRouteMatch } from "react-router";
 
 const DetailedPreview = (props) => {

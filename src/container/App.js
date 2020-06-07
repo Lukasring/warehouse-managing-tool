@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../components/Header/Header";
 import Nav from "../components/Navigation/Nav";
 import Products from "../components/Products/Products";
@@ -51,9 +51,48 @@ function App() {
     JSON.parse(localStorage.getItem("products") || "")
   );
 
+  const usePrevious = (value) => {
+    const ref = useRef();
+    useEffect(() => {
+      ref.current = value;
+    });
+    return ref.current;
+  };
+
+  const prevState = usePrevious(products);
   useEffect(() => {
     localStorage.setItem("products", JSON.stringify(products));
   }, [products]);
+
+  useEffect(() => {
+    console.log(products);
+    console.log(prevState);
+    if (prevState) {
+      if (products.length === prevState.length) {
+        const today = new Date();
+        let date;
+        let time;
+        let dateTime;
+        for (let i = 0; i < products.length; i++) {
+          if (products[i].price !== prevState[i].price) {
+            console.log(`${prevState[i].price} => ${products[i].price}`);
+            date =
+              today.getFullYear() +
+              "-" +
+              (today.getMonth() + 1) +
+              "-" +
+              today.getDate();
+            time = today.getHours() + ":" + today.getMinutes();
+            dateTime = date + " " + time;
+            console.log(dateTime);
+          }
+          if (products[i].quantity !== prevState[i].quantity) {
+            console.log(`${prevState[i].quantity} => ${products[i].quantity}`);
+          }
+        }
+      }
+    }
+  });
 
   const removeProductHandler = (index) => {
     const newProducts = [...products];
