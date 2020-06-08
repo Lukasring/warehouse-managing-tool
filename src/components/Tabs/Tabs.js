@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import styles from "./Tabs.module.css";
 
 const Tabs = (props) => {
-  const [active, setActive] = useState([props.types[0]]);
-
+  const [active, setActive] = useState(props.types[0]);
+  console.log(active);
   return (
-    <div>
+    <div className={styles.Container}>
       <div className={styles.TabGroup}>
         {props.types.map((type) => (
           <button
-            className={styles.Tab}
+            className={`${styles.Tab} ${active === type ? styles.Active : ""}`}
             key={type}
             active={active === type}
             onClick={() => setActive(type)}
@@ -18,9 +18,7 @@ const Tabs = (props) => {
           </button>
         ))}
       </div>
-      <p />
-      {console.log(props.contents)}
-      {props.contents[active]}
+      <div className={styles.TabContent}>{props.contents[active]}</div>
     </div>
   );
 };

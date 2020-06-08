@@ -28,15 +28,19 @@ const ChangeLogChart = (props) => {
   const options = {
     chart: {
       type: "line",
+      backgroundColor: "#e7e7e7",
     },
     title: {
       text: props.title,
     },
 
+    colors: ["#470147"],
+
     xAxis: {
       categories: timeData,
     },
     yAxis: {
+      gridLineColor: "#470147",
       labels: {
         formatter: function () {
           return key === "price" ? this.value + "€" : this.value;

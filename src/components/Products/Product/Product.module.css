@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+}
+
+.Product {
+  display: flex;
+  width: 80%;
+  min-width: 60rem;
+  margin: auto;
+  font-family: sans-serif;
+  border-top: 2px solid #ccc;
+  justify-content: space-around;
+  align-items: center;
+  opacity: 0.9;
+}
+
+.Product:hover {
+  opacity: 1;
+}
+
+.ProductsHeader {
+  display: flex;
+  padding-right: 13%;
+  width: 80%;
+  min-width: 60rem;
+  margin: auto;
+  font-family: sans-serif;
+  border-top: 2px solid #ccc;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Product ul,
+.ProductsHeader ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  text-align: center;
+}
+
+.Product li,
+.ProductsHeader li {
+  min-width: 12%;
+  list-style: none;
+  text-align: center;
+  /* margin: 0.5rem 0.5rem; */
+  padding: 1rem;
+}
+
+.Edit {
+  background-color: rgb(3, 3, 182);
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  color: white;
+  border: none;
+}
+
+.Edit:hover {
+  background-color: rgb(150, 150, 253);
+  cursor: pointer;
+}
+
+.View {
+  background-color: #470147;
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  color: white;
+  border: none;
+}
+
+.View:hover {
+  background-color: rgb(255, 131, 255);
+  cursor: pointer;
+}
+
+.Delete {
+  background-color: rgb(196, 3, 3);
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  color: white;
+  border: none;
+}
+
+.Delete:hover {
+  background-color: rgb(255, 109, 109);
+  cursor: pointer;
+}

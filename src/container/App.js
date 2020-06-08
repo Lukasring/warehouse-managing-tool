@@ -20,35 +20,10 @@ import {
 import "./App.css";
 
 function App() {
-  // const [products, setProducts] = useState([
-  //   // {
-  //   //   name: "Hat",
-  //   //   ean: "123456789",
-  //   //   type: "headwear",
-  //   //   weight: "120",
-  //   //   color: "Red",
-  //   //   isActive: false,
-  //   // },
-  //   // {
-  //   //   name: "Shirt",
-  //   //   ean: "987654321",
-  //   //   type: "Top",
-  //   //   weight: "130",
-  //   //   color: "Blue",
-  //   //   isActive: false,
-  //   // },
-  //   // {
-  //   //   name: "Sweater",
-  //   //   ean: "123454321",
-  //   //   type: "Top",
-  //   //   weight: "200",
-  //   //   color: "Yellow",
-  //   //   isActive: false,
-  //   // },
-  // ]);
-
   const [products, setProducts] = useState(
-    JSON.parse(localStorage.getItem("products") || "")
+    JSON.parse(localStorage.getItem("products"))
+      ? JSON.parse(localStorage.getItem("products"))
+      : []
   );
 
   const usePrevious = (value) => {

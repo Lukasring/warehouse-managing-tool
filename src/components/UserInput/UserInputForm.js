@@ -57,7 +57,7 @@ const UserInputForm = (props) => {
   return (
     <form className={styles.Form} id="product-submit-form">
       {redirect ? <Redirect to="/products"></Redirect> : null}
-      <label className={styles.Label}>Enter Product Properties</label>
+      <label className={styles.Label}>Enter Product Details</label>
       <input
         className={styles.Input}
         type="text"
@@ -127,6 +127,7 @@ const UserInputForm = (props) => {
             props.submitHandler(event, addedProduct, index);
             document.getElementById("product-submit-form").reset();
             setAddedProducts([]);
+            alert("Product added!");
             if (props.products) {
               setRedirect(true);
             }

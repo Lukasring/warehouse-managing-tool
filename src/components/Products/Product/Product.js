@@ -1,10 +1,10 @@
 import React from "react";
-import "./Product.css";
+import styles from "./Product.module.css";
 import { Link } from "react-router-dom";
 
 const Product = (props) => {
   return (
-    <div className="product-item">
+    <div className={styles.Product}>
       <ul>
         <li>{props.name}</li>
         <li>{props.ean}</li>
@@ -20,20 +20,16 @@ const Product = (props) => {
             onChange={props.isActive}
           ></input>
         </li>
-        <li>
-          <Link to={`/products/preview/${props.index}`}>
-            <button>View</button>
-          </Link>
-        </li>
-        <li>
-          <Link to={`/products/${props.index}/edit`}>
-            <button>Edit</button>
-          </Link>
-        </li>
-        <li>
-          <button onClick={props.removeItem}>Delete</button>
-        </li>
       </ul>
+      <Link to={`/products/preview/${props.index}`}>
+        <button className={styles.View}>View</button>
+      </Link>
+      <Link to={`/products/${props.index}/edit`}>
+        <button className={styles.Edit}>Edit</button>
+      </Link>
+      <button className={styles.Delete} onClick={props.removeItem}>
+        Delete
+      </button>
     </div>
   );
 };

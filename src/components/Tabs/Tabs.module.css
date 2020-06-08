@@ -1,13 +1,29 @@
+.Container {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+}
 .Tab {
   font-size: 1rem;
   padding: 0.5rem 4rem;
   cursor: pointer;
-  background: white;
+  background: #ffffff;
   border: none;
   outline: 0;
+  opacity: 0.8;
 }
 
 .TabGroup {
+  display: flex;
+  justify-content: center;
+}
+
+.Active {
+  border-bottom: 2px solid #470147;
+  opacity: 1;
+}
+
+.TabContent {
   display: flex;
   justify-content: center;
 }

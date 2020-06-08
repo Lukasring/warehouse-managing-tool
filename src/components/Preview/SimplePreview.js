@@ -10,11 +10,28 @@ const SimplePreview = (props) => {
     >
       <h1 className={styles.Name}>{props.name}</h1>
       <h2 className={styles.Type}>{props.type}</h2>
-      <p>Color: {props.color}</p>
-      <p>Weight: {props.weight}g</p>
-      <p>EAN: {props.ean}</p>
-      <p>Price: {props.price}€</p>
-      <p>Quantity: {props.quantity}</p>
+      <div className={styles.Details}>
+        <div className={styles.DetailsPair}>
+          <p>Color:</p>
+          <p>{props.color}</p>
+        </div>
+        <div className={styles.DetailsPair}>
+          <p>Weight:</p>
+          <p>{props.weight}g</p>
+        </div>
+        <div className={styles.DetailsPair}>
+          <p>EAN:</p>
+          <p>{props.ean}</p>
+        </div>
+        <div className={styles.DetailsPair}>
+          <p>Price:</p>
+          <p>{props.price}€</p>
+        </div>
+        <div className={styles.DetailsPair}>
+          <p>Quantity:</p>
+          <p>{props.quantity}</p>
+        </div>
+      </div>
     </div>
   );
 };

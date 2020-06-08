@@ -1,11 +1,8 @@
-.Container {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-}
 .PreviewCard {
   display: flex;
   flex-direction: column;
+  margin: 1rem;
+  min-width: 300px;
   width: 300px;
   background-color: #ccc;
   border: 1px solid black;
@@ -26,11 +23,26 @@
   font-size: 1rem;
 }
 
+.Details {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.DetailsPair {
+  display: flex;
+  justify-content: space-between;
+}
+
 .Empty {
   background-color: rgb(231, 164, 164);
 }
 
 .PreviewList {
   display: flex;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: auto;
+  justify-content: flex-start;
 }
