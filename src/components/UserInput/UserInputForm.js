@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./UserInputForm.module.css";
 import { Redirect, useRouteMatch } from "react-router-dom";
 import Input from "./Input";
+import MessagePopup from "./MessagePopup";
 
 const UserInputForm = (props) => {
   const [addedProduct, setAddedProducts] = useState(
@@ -12,6 +13,9 @@ const UserInputForm = (props) => {
   let index = match.params.id;
 
   const [redirect, setRedirect] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+
   const handleChange = (event) => {
     setAddedProducts({
       ...addedProduct,
@@ -25,7 +29,7 @@ const UserInputForm = (props) => {
 
   const formInputValidation = (addedProduct) => {
     let isValid = false;
-    const noOfRequiredKeys = 9; //simple object key validation for now
+    const noOfRequiredKeys = props.names.length + 2; //simple object key validation for now
     const productValues = Object.values(addedProduct);
     let hasRequiredKeys = false;
     let keysHaveValues = false;
@@ -34,12 +38,7 @@ const UserInputForm = (props) => {
       ? (hasRequiredKeys = true)
       : (hasRequiredKeys = false);
 
-    console.log(Object.keys(productValues).length);
-
     function noneEmpty(arr) {
-      // for (let i = 0; i < arr.length; i++) {
-      //   arr[i] = arr[i].trim();
-      // }
       return arr.indexOf("") === -1;
     }
 
@@ -48,21 +47,24 @@ const UserInputForm = (props) => {
     if (hasRequiredKeys && keysHaveValues) {
       isValid = true;
     } else isValid = false;
-
-    console.log("keys " + hasRequiredKeys);
-    console.log("values " + keysHaveValues);
-    console.log("is valid " + isValid);
     return isValid;
   };
-  console.log("form validation " + formInputValidation(addedProduct));
+
+  const message = <p>All fields must be filled!</p>;
 
   return (
     <form className={styles.Form} id="product-submit-form">
       {redirect ? <Redirect to="/products"></Redirect> : null}
+      {showPopup ? (
+        <MessagePopup confirm={() => setShowPopup(false)}>
+          Product Added!
+        </MessagePopup>
+      ) : null}
       <label className={styles.Label}>{props.formTitle}</label>
       {props.names.map((name) => {
         return (
           <Input
+            key={name}
             type="text"
             name={name}
             handleChange={handleChange}
@@ -70,6 +72,7 @@ const UserInputForm = (props) => {
           />
         );
       })}
+      <div className={styles.Message}>{showMessage ? message : null}</div>
       <div className={styles.Buttons}>
         <input
           className={styles.SubmitBtn}
@@ -80,11 +83,13 @@ const UserInputForm = (props) => {
               props.submitHandler(event, addedProduct, index);
               document.getElementById("product-submit-form").reset();
               setAddedProducts([]);
-              alert("Product added!");
+              setShowMessage(false);
+              setShowPopup(true);
               if (props.products) {
                 setRedirect(true);
               }
             } else {
+              setShowMessage(true);
               event.preventDefault();
             }
           }}

@@ -46,3 +46,9 @@
   margin: auto;
   justify-content: flex-start;
 }
+
+.Message {
+  width: 100%;
+  font-size: 1.2rem;
+  text-align: center;
+}

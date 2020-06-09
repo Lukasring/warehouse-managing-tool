@@ -81,7 +81,17 @@ function App() {
   );
 
   if (products.length === 0) {
-    productList = <p>There are no products</p>;
+    productList = (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "1.2rem",
+        }}
+      >
+        <p>There are no products</p>
+      </div>
+    );
   }
 
   const inputNames = [

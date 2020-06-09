@@ -15,15 +15,12 @@ const ChangeLogChart = (props) => {
     key = "quantity";
   }
 
-  console.log("c history: " + changeHistory);
-
   const itemChangeHistory = changeHistory.filter((item) => {
     return item.id === props.id;
   });
 
   const timeData = itemChangeHistory.map((item) => item.time);
   const valueData = itemChangeHistory.map((item) => parseInt(item[key]));
-  console.log(valueData);
 
   const options = {
     chart: {
@@ -54,12 +51,10 @@ const ChangeLogChart = (props) => {
     series: [
       {
         name: key.charAt(0).toUpperCase() + key.slice(1),
-        data: valueData,
+        data: valueData.slice(-5),
       },
     ],
   };
-
-  console.log(options);
 
   return (
     <div className={styles.container}>

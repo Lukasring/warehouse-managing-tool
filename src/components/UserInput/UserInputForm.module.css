@@ -32,6 +32,56 @@
   font-size: 2rem;
 }
 
+.Message {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  color: red;
+}
+
+.Backdrop {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 2;
+  width: 100vw;
+}
+
+.Popup {
+  display: flex;
+  top: 40%;
+  left: 39%;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  width: 300px;
+  height: 200px;
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  border: 3px solid #470147;
+  border-radius: 1rem;
+  z-index: 5;
+  transition: 500ms;
+}
+
+.Popup button {
+  background-color: #470147;
+  align-self: center;
+  padding: 0.5rem;
+  color: white;
+  outline: none;
+  border: 1px solid #470147;
+  border-radius: 0.5rem;
+  width: 50px;
+  cursor: pointer;
+}
+
+.Popup button:hover {
+  background-color: rgb(85, 56, 85);
+}
+
 .Buttons {
   display: flex;
   justify-content: center;
@@ -72,4 +122,8 @@
 
 .CancelBtn:hover {
   background: rgb(255, 109, 109);
+}
+
+.CancelBtn:focus {
+  outline: none;
 }

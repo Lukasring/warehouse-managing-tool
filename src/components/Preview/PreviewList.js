@@ -7,7 +7,9 @@ const PreviewList = (props) => {
     return product.isActive === true;
   });
 
-  let activeProductList = <p>There are no active products!</p>;
+  let activeProductList = (
+    <p className={styles.Message}>There are no active products!</p>
+  );
 
   if (activeProducts.length > 0) {
     activeProductList = activeProducts.map((product, index) => {
