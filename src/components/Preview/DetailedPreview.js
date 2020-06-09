@@ -8,7 +8,6 @@ import { useRouteMatch } from "react-router";
 const DetailedPreview = (props) => {
   let match = useRouteMatch();
   let index = match.params.id;
-  console.log(index);
 
   const types = ["Details", "Price History", "Quantity History"];
 

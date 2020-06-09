@@ -18,8 +18,6 @@ function Products(props) {
     <div>
       <ProductsHeader names={columnNames}></ProductsHeader>
       {props.products.map((product, index) => {
-        // console.log(product);
-        // console.log(Object.keys(product));
         return (
           <Product
             index={index}

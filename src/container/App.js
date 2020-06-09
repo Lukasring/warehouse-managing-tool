@@ -53,7 +53,6 @@ function App() {
 
   const formSubmitHandler = (event, userInput) => {
     event.preventDefault();
-    console.log(userInput);
     const newProducts = [...products];
     newProducts.push(userInput);
     setProducts(newProducts);

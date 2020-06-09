@@ -3,7 +3,6 @@ import styles from "./Tabs.module.css";
 
 const Tabs = (props) => {
   const [active, setActive] = useState(props.types[0]);
-  console.log(active);
   return (
     <div className={styles.Container}>
       <div className={styles.TabGroup}>
