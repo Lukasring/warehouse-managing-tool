@@ -19,14 +19,14 @@
 }
 
 .ProductsHeader {
-  display: flex;
+  display: block;
   padding-right: 13%;
   width: 80%;
   min-width: 60rem;
   margin: auto;
   font-family: sans-serif;
   border-top: 2px solid #ccc;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
   align-items: center;
 }
 
@@ -42,11 +42,11 @@
 
 .Product li,
 .ProductsHeader li {
-  min-width: 12%;
+  flex-basis: 12%;
   list-style: none;
   text-align: center;
   /* margin: 0.5rem 0.5rem; */
-  padding: 1rem;
+  /* padding: 1rem; */
 }
 
 .Edit {

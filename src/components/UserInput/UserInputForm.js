@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./UserInputForm.module.css";
 import { Redirect, useRouteMatch } from "react-router-dom";
+import Input from "./Input";
+
 const UserInputForm = (props) => {
   const [addedProduct, setAddedProducts] = useState(
     props.products ? props.products[props.index] : []
@@ -57,85 +59,50 @@ const UserInputForm = (props) => {
   return (
     <form className={styles.Form} id="product-submit-form">
       {redirect ? <Redirect to="/products"></Redirect> : null}
-      <label className={styles.Label}>Enter Product Details</label>
-      <input
-        className={styles.Input}
-        type="text"
-        placeholder="NAME"
-        name="name"
-        defaultValue={props.products ? props.products[props.index].name : null}
-        onChange={handleChange}
-      />
-      <input
-        className={styles.Input}
-        type="text"
-        placeholder="EAN"
-        name="ean"
-        defaultValue={props.products ? props.products[props.index].ean : null}
-        onChange={handleChange}
-      />
-      <input
-        className={styles.Input}
-        type="text"
-        placeholder="TYPE"
-        name="type"
-        defaultValue={props.products ? props.products[props.index].type : null}
-        onChange={handleChange}
-      />
-      <input
-        className={styles.Input}
-        type="text"
-        placeholder="WEIGHT"
-        name="weight"
-        defaultValue={
-          props.products ? props.products[props.index].weight : null
-        }
-        onChange={handleChange}
-      />
-      <input
-        className={styles.Input}
-        type="text"
-        placeholder="COLOR"
-        name="color"
-        defaultValue={props.products ? props.products[props.index].color : null}
-        onChange={handleChange}
-      />
-      <input
-        className={styles.Input}
-        type="text"
-        placeholder="PRICE"
-        name="price"
-        defaultValue={props.products ? props.products[props.index].price : null}
-        onChange={handleChange}
-      />
-      <input
-        className={styles.Input}
-        type="text"
-        placeholder="QUANTITY"
-        name="quantity"
-        defaultValue={
-          props.products ? props.products[props.index].quantity : null
-        }
-        onChange={handleChange}
-      />
-      <input
-        className={styles.SubmitButton}
-        type="submit"
-        value={props.products ? "Save" : "Add Product"}
-        onClick={(event) => {
-          if (formInputValidation(addedProduct)) {
-            props.submitHandler(event, addedProduct, index);
+      <label className={styles.Label}>{props.formTitle}</label>
+      {props.names.map((name) => {
+        return (
+          <Input
+            type="text"
+            name={name}
+            handleChange={handleChange}
+            product={props.products ? props.products[index] : null}
+          />
+        );
+      })}
+      <div className={styles.Buttons}>
+        <input
+          className={styles.SubmitBtn}
+          type="submit"
+          value={props.products ? "Save" : "Add Product"}
+          onClick={(event) => {
+            if (formInputValidation(addedProduct)) {
+              props.submitHandler(event, addedProduct, index);
+              document.getElementById("product-submit-form").reset();
+              setAddedProducts([]);
+              alert("Product added!");
+              if (props.products) {
+                setRedirect(true);
+              }
+            } else {
+              event.preventDefault();
+            }
+          }}
+        />
+        <button
+          className={styles.CancelBtn}
+          onClick={(event) => {
+            event.preventDefault();
             document.getElementById("product-submit-form").reset();
             setAddedProducts([]);
-            alert("Product added!");
             if (props.products) {
               setRedirect(true);
             }
-          } else {
-            event.preventDefault();
-          }
-        }}
-      />
+          }}
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 };

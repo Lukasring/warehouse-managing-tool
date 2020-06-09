@@ -84,8 +84,21 @@ function App() {
     productList = <p>There are no products</p>;
   }
 
+  const inputNames = [
+    "name",
+    "ean",
+    "type",
+    "weight",
+    "color",
+    "price",
+    "quantity",
+  ];
   const userInputForm = (
-    <UserInputForm submitHandler={formSubmitHandler}></UserInputForm>
+    <UserInputForm
+      submitHandler={formSubmitHandler}
+      names={inputNames}
+      formTitle={"Enter Product Details"}
+    ></UserInputForm>
   );
 
   return (
@@ -107,6 +120,7 @@ function App() {
             <EditProduct
               products={products}
               saveEditHandler={saveEditHandler}
+              names={inputNames}
             ></EditProduct>
           </Route>
           <Route exact path="/">
