@@ -93,19 +93,14 @@ function App() {
     );
   }
 
-  const inputNames = [
-    "name",
-    "ean",
-    "type",
-    "weight",
-    "color",
-    "price",
-    "quantity",
-  ];
+  const textInputNames = ["name", "ean", "type", "color"];
+  const numberInputNames = ["weight", "price", "quantity"];
+
   const userInputForm = (
     <UserInputForm
       submitHandler={formSubmitHandler}
-      names={inputNames}
+      namesText={textInputNames}
+      namesNumbers={numberInputNames}
       formTitle={"Enter Product Details"}
     ></UserInputForm>
   );
@@ -129,7 +124,8 @@ function App() {
             <EditProduct
               products={products}
               saveEditHandler={saveEditHandler}
-              names={inputNames}
+              namesText={textInputNames}
+              namesNumbers={numberInputNames}
             ></EditProduct>
           </Route>
           <Route exact path="/">

@@ -29,10 +29,19 @@ const UserInputForm = (props) => {
 
   const formInputValidation = (addedProduct) => {
     let isValid = false;
-    const noOfRequiredKeys = props.names.length + 2; //simple object key validation for now
-    const productValues = Object.values(addedProduct);
     let hasRequiredKeys = false;
     let keysHaveValues = false;
+    let noOfRequiredKeys;
+    //simple object key validation for now
+    if (props.namesText && !props.namesNumbers) {
+      noOfRequiredKeys = props.namesText.length + 2;
+    } else if (!props.namesText && props.namesNumbers) {
+      noOfRequiredKeys = props.namesNumbers.length + 2;
+    } else if (props.namesText && props.namesNumbers) {
+      noOfRequiredKeys = props.namesText.length + props.namesNumbers.length + 2;
+    }
+
+    const productValues = Object.values(addedProduct);
 
     noOfRequiredKeys === Object.keys(productValues).length
       ? (hasRequiredKeys = true)
@@ -52,6 +61,36 @@ const UserInputForm = (props) => {
 
   const message = <p>All fields must be filled!</p>;
 
+  let textInputList;
+  let numberInputList;
+  if (props.namesText) {
+    textInputList = props.namesText.map((name) => {
+      return (
+        <Input
+          key={name}
+          type="text"
+          name={name}
+          handleChange={handleChange}
+          product={props.products ? props.products[index] : null}
+        />
+      );
+    });
+  }
+
+  if (props.namesNumbers) {
+    numberInputList = props.namesNumbers.map((name) => {
+      return (
+        <Input
+          key={name}
+          type="number"
+          name={name}
+          handleChange={handleChange}
+          product={props.products ? props.products[index] : null}
+        />
+      );
+    });
+  }
+
   return (
     <form className={styles.Form} id="product-submit-form">
       {redirect ? <Redirect to="/products"></Redirect> : null}
@@ -61,17 +100,8 @@ const UserInputForm = (props) => {
         </MessagePopup>
       ) : null}
       <label className={styles.Label}>{props.formTitle}</label>
-      {props.names.map((name) => {
-        return (
-          <Input
-            key={name}
-            type="text"
-            name={name}
-            handleChange={handleChange}
-            product={props.products ? props.products[index] : null}
-          />
-        );
-      })}
+      {textInputList}
+      {numberInputList}
       <div className={styles.Message}>{showMessage ? message : null}</div>
       <div className={styles.Buttons}>
         <input
@@ -79,6 +109,7 @@ const UserInputForm = (props) => {
           type="submit"
           value={props.products ? "Save" : "Add Product"}
           onClick={(event) => {
+            event.preventDefault();
             if (formInputValidation(addedProduct)) {
               props.submitHandler(event, addedProduct, index);
               document.getElementById("product-submit-form").reset();
@@ -90,7 +121,6 @@ const UserInputForm = (props) => {
               }
             } else {
               setShowMessage(true);
-              event.preventDefault();
             }
           }}
         />

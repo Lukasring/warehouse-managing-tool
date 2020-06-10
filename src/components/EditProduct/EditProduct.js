@@ -9,7 +9,8 @@ const EditProduct = (props) => {
     <UserInputForm
       submitHandler={props.saveEditHandler}
       products={props.products}
-      names={props.names}
+      namesText={props.namesText}
+      namesNumbers={props.namesNumbers}
       index={index}
     ></UserInputForm>
   );
